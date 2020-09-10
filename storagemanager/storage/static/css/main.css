@@ -1,0 +1,68 @@
+.main {
+    background: #0066CC;
+    min-height: 160px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.logo {
+    padding-top: 27px;
+    opacity: 1;
+}
+
+h3 {
+    font-family: Tahoma, Geneva, sans-serif;
+    text-align: center;
+    size: 10pt;
+}
+
+.wrapper {
+    width: 350px;
+    margin: auto;
+}
+
+.button {
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: white;
+    border: solid #0066CC 2px;
+    color: #0066CC;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    transition: 0.3s;
+  }
+
+a.button:hover {
+    /* opacity: 0.6; */
+    background: #0066CC;
+    color: white;
+    
+}
+
+#main-footer {
+    position: absolute;
+    bottom: 15px;
+    width: 99%;
+    height: 2,5rem; 
+    text-align: center;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 10pt;
+    text-decoration: none;
+    } 
+
+a#back {
+    background-color: white;
+    color: #0066CC;
+    border: solid #0066CC 2px;
+    padding: 1em 1.5em;
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+    }
+
+a#back:hover {
+    background: #0066CC;
+    color: white;
+}

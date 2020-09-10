@@ -1,0 +1,20 @@
+{% extends "storage/base.html" %}
+
+{% block content %}
+    <div class="wrapper">
+        <h3> What would you like to do?</h3> 
+        <br>
+        <br>
+        <div>
+        <a class="button" href="{% url 'add-item' %}">Add item</a>
+        <br>
+        <a class="button"href="{% url 'show-all' %}">Show all items</a>
+        <br>
+        <a class="button"href="{% url 'show-items-from-category' %}">Show items from category</a>
+        <br>
+        <a class="button"href="{% url 'delete-item' %}">Delete item</a>
+        <br>
+        <a class="button"href="{% url 'delete-all-items' %}">Delete all items</a>
+        <br>
+    </div>
+{% endblock content %}
