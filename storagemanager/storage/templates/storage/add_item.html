@@ -1,7 +1,14 @@
 {% extends "storage/base.html" %}
 
 {% block content %}
-    <h3> This page lets user add item</h3> 
+    <h3> Adding item to the storage</h3> 
+    <div style="text-align: center;">
+        <form method="POST" style=" margin-top: 50px;">
+            {% csrf_token %}
+                {{ form.as_p }}
+            <button style="margin-top: 50px;" type="submit">Add item</button>
+        </form>
+    </div>
 
     <p id="main-footer"><a id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
 {% endblock content %}

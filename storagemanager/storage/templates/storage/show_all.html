@@ -1,7 +1,17 @@
 {% extends "storage/base.html" %}
 
 {% block content %}
-    <h3> This page shows all items</h3> 
+    <h3> Showing all items in the storage</h3> 
+    <br>
+    <br>
+        <div class="all_items">
+            <ol>
+                {% for item in all_items %}
+                    <li style="margin-bottom: 15px;">{{ item }} (id: {{ item.id }})</li>
+                {% endfor %}
+            </ol>
+            </div>
+        
 
     <p id="main-footer"><a id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
 {% endblock content %}
