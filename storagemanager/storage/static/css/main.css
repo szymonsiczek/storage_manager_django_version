@@ -73,16 +73,16 @@ li {
     margin-bottom: 8px;
 }
 
-button {
+#bluebutton {
     background-color:#0066CC;
     color: white;
-    border: solid #0066CC 2px;
     cursor: pointer; 
     font-size: medium;
     border-radius: 15px;
     box-shadow: 0 4px #999;
     width: 100px;
     height: 50px;   
+    margin-top: 40px;
 }
 
 button:active {
@@ -95,4 +95,82 @@ button:active {
     margin: auto;
     text-align: center;
 
+}
+small.id {
+    size: 4pt;
+    font-style: italic;
+}
+
+#redbutton {
+    background-color:red;
+    color: white;
+    cursor: pointer; 
+    font-size: medium;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+    width: 100px;
+    height: 50px;   
+    margin-top: 40px;
+}
+
+.confirm-delete-button {
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: red;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    transition: 0.3s;
+    width: 350px;
+    margin-bottom: 10px;
+}
+
+a.confirm-delete-button:visited {
+color: white;
+}
+
+.cancel-deleting-button {
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: #0066CC;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    transition: 0.3s;
+    width: 350px;
+    margin-top: 10px;
+}
+
+a.cancel-deleting-button:visited {
+    color: white;
+}
+
+.delete-alert {
+    text-align: center;
+    width: 500px;
+    height: 50px;
+    margin: auto;
+    background-color: #4CAF50;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: small;
+    line-height: 50px;
+    opacity: 0.8;
+}
+
+.wrong-value-type {
+    text-align: center;
+    width: 500px;
+    height: 50px;
+    margin: auto;
+    background-color:red;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: small;
+    line-height: 50px;
+    opacity: 0.8;
 }

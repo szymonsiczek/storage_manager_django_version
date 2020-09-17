@@ -7,7 +7,7 @@
         <div class="all_items">
             <ol>
                 {% for item in all_items %}
-                    <li style="margin-bottom: 15px;">{{ item }} (id: {{ item.id }})</li>
+                    <li style="margin-bottom: 15px;">{{ item }} <small class="id">(id: {{ item.id }})</small></li>
                 {% endfor %}
             </ol>
             </div>
