@@ -9,6 +9,7 @@ urlpatterns = [
     path('add_item/', AddItemCreateView.as_view(), name='add-item'),
     path('show_all/', ShowAllListView.as_view(), name='show-all'),
     path('show_items_from_category/', views.show_items_from_category, name='show-items-from-category'),
+    path('show_items_from_chosen_category/', views.show_items_from_chosen_category, name='show-items-from-chosen-category'),
     path('delete_item/', views.delete_item, name='delete-item'),
     path('delete_item_confirm/', views.delete_item_confirm, name='delete-item-confirm'),
     path('delete_item_after_confirm/', views.delete_item_after_confirm, name='delete-item-after-confirm'),

@@ -23,9 +23,20 @@ class ShowAllListView(ListView):
     template_name = 'storage/show_all.html'
     context_object_name = 'all_items'
     ordering = ['category', 'type']
-    
+
 def show_items_from_category(request):
-    return render(request, 'storage/show_items_from_category.html')
+    item_set = set()                      
+    for item in Item.objects.all():
+        item_set.add(item.category)
+    categories = {'categories': item_set }
+    return render(request, 'storage/show_items_from_category.html', categories)
+
+def show_items_from_chosen_category(request):
+    item_set = set()              #repeated code!!!
+    for item in Item.objects.all():
+        item_set.add(item.category)
+    items_to_show = {'items_to_show': Item.objects.filter(category=request.POST.get('category')), 'categories': item_set}
+    return render(request, 'storage/show_items_from_chosen_category.html', items_to_show)
 
 def delete_item(request):
     context = {'all_items': sorted(Item.objects.all(), key=attrgetter('category', 'type', 'model'))}
@@ -41,7 +52,6 @@ def delete_item_confirm(request):
     except ValueError:
         messages.warning(request, f'Please type a number')
         return redirect('delete-item')
-
 
 def delete_item_after_confirm(request):
     item_var = Item.objects.filter(id=request.POST.get('id')).first()

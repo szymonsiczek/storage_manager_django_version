@@ -4,18 +4,21 @@
     {% if messages %}
         {% for message in messages %}
             {% if message.tags == 'success' %}
-            <div class="delete-alert">
+            <div class="delete-info">
                 <h4 class="">{{ message }} </h4>
             </div>
+
             {% elif message.tags == 'warning' %}
             <div class="wrong-value-type">
                 <h4 class="">{{ message }} </h4>
             </div>
+
             {% endif %}
         {% endfor %}
     {% endif %}
 
     <h3>Choose an item to delete:</h3>
+
     <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
         <form action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
@@ -34,7 +37,6 @@
     <div style="text-align: center; margin-top: 40px;">
         <form action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
-
             <input type="text" name="id" value=""> </input>
             <br>
             <button id="redbutton" type="submit">Delete</button>

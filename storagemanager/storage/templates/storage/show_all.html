@@ -4,6 +4,7 @@
     <h3> Showing all items in the storage</h3> 
     <br>
     <br>
+    <div style="position: relative; min-height: 100vh;">
         <div class="all_items">
             <ol>
                 {% for item in all_items %}
@@ -11,7 +12,9 @@
                 {% endfor %}
             </ol>
             </div>
-        
 
-    <p id="main-footer"><a id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
+    <footer id="main-footer">
+    <a id="back" href="{% url 'main-page' %}">Back to the main page</a>
+    </footer>
+    </div>
 {% endblock content %}

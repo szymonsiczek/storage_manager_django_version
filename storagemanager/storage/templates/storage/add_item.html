@@ -2,13 +2,18 @@
 
 {% block content %}
     <h3> Adding item to the storage</h3> 
+    
+    <div style="position: relative; min-height: 100vh;">
     <div style="text-align: center;">
         <form method="POST" style=" margin-top: 50px;">
             {% csrf_token %}
-                {{ form.as_p }}
+            {{ form.as_p }}
             <button id="bluebutton" type="submit">Add item</button>
         </form>
     </div>
-
-    <p id="main-footer"><a id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
+    
+    <footer id="main-footer">
+    <a id="back" href="{% url 'main-page' %}">Back to the main page</a>
+    </footer>
+    </div>
 {% endblock content %}

@@ -50,7 +50,8 @@ a.button:hover {
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 10pt;
     text-decoration: none;
-    } 
+    margin-bottom: 20px;
+} 
 
 #back {
     background-color: white;
@@ -82,7 +83,7 @@ li {
     box-shadow: 0 4px #999;
     width: 100px;
     height: 50px;   
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 button:active {
@@ -149,28 +150,28 @@ a.cancel-deleting-button:visited {
     color: white;
 }
 
-.delete-alert {
+.delete-info {
     text-align: center;
-    width: 500px;
+    width: 520px;
     height: 50px;
     margin: auto;
     background-color: #4CAF50;
     color: white;
     font-family: Tahoma, Geneva, sans-serif;
-    font-size: small;
+    font-size: medium;
     line-height: 50px;
     opacity: 0.8;
 }
 
 .wrong-value-type {
     text-align: center;
-    width: 500px;
+    width: 520px;
     height: 50px;
     margin: auto;
     background-color:red;
     color: white;
     font-family: Tahoma, Geneva, sans-serif;
-    font-size: small;
+    font-size: larger;
     line-height: 50px;
     opacity: 0.8;
 }
