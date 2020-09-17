@@ -34,6 +34,9 @@ def delete_item(request):
 def delete_item_confirm(request):
     try:
         context = {'item_to_delete': str(Item.objects.filter(id=request.POST.get('id')).first()), 'id': request.POST.get('id')}
+        if context.get('item_to_delete').startswith('None'):
+            messages.warning(request, f'Item with that ID could not be found.')
+            return redirect('delete-item')
         return render(request, 'storage/delete_item_confirm.html', context)
     except ValueError:
         messages.warning(request, f'Please type a number')
@@ -42,20 +45,11 @@ def delete_item_confirm(request):
 
 def delete_item_after_confirm(request):
     item_var = Item.objects.filter(id=request.POST.get('id')).first()
-    # item_to_delete = {'item_to_delete': item_var}
     Item.objects.filter(id=request.POST.get('id')).first().delete()
     messages.success(request, f'Item {item_var} has been deleted')
     return redirect('delete-item')
-    # return render(request, 'storage/delete_item_after_confirm.html', item_to_delete)
-    
-
-class DeleteItemDeleteView(DeleteView):
-    model = Item
-#     template_name = 'deleteitem.html'
-    pass
 
 def delete_all_items(request):
     return render(request, 'storage/delete_all_items.html')
 
-# 
 
