@@ -1,7 +1,7 @@
 {% extends "storage/base.html" %}
 
 {% block content %}
-    <div style="text-align: center;">
+    <div class="centered">
         <h3>Are you sure that you want to delete:</h3>
         <br>
         <br>
@@ -9,13 +9,11 @@
         <form action=" {% url 'delete-item-after-confirm' %}" method="POST">
             {% csrf_token %}
             <select name="id">
-                <option style="width: 350px;" value="{{ id }}">{{ item_to_delete }} id: {{ id }}</option>
+                <option value="{{ id }}">{{ item_to_delete }} id: {{ id }}</option>
             </select>
             <br>
             <button type="submit" id="redbutton">Delete</button>
         </form> 
             <a href="{% url 'delete-item' %}"><button id="bluebutton">Cancel</button></a>        
     </div>
-    
-    <p id="main-footer"><a id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
 {% endblock content %}

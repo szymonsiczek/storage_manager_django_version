@@ -84,6 +84,7 @@ li {
     width: 100px;
     height: 50px;   
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 button:active {
@@ -158,9 +159,10 @@ a.cancel-deleting-button:visited {
     background-color: #4CAF50;
     color: white;
     font-family: Tahoma, Geneva, sans-serif;
-    font-size: medium;
+    font-size: small;
     line-height: 50px;
     opacity: 0.8;
+    letter-spacing: 0.8pt;
 }
 
 .wrong-value-type {
@@ -171,7 +173,29 @@ a.cancel-deleting-button:visited {
     background-color:red;
     color: white;
     font-family: Tahoma, Geneva, sans-serif;
-    font-size: larger;
+    font-size: normal;
+    font-weight: 100;
     line-height: 50px;
     opacity: 0.8;
+    letter-spacing: 1pt;
+}
+
+form #adding_item_form {
+    margin-top: 50px;
+}
+
+div.centered {
+    text-align: center;
+}
+
+#delete_item_div {
+    text-align: center; 
+    margin-top: 40px; 
+    margin-bottom: 40px;
+}
+
+.item_list {
+    margin-bottom: 15px; 
+    font-size: 10pt; 
+    font-family: Tahoma, Geneva, sans-serif;
 }

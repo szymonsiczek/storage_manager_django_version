@@ -4,17 +4,18 @@
     <h3> Showing all items in the storage</h3> 
     <br>
     <br>
-    <div style="position: relative; min-height: 100vh;">
+
+    {% if not all_items %}
+    <div class="all_items">
+        <small class="item_list">There are no items in the storage.</small>
+    </div>
+    {% endif%}
+
         <div class="all_items">
             <ol>
                 {% for item in all_items %}
-                    <li style="margin-bottom: 15px; font-size: 10pt;">{{ item }} <small class="id">(id: {{ item.id }})</small></li>
+                    <li class="item_list">{{ item }} <small class="id">(id: {{ item.id }})</small></li>
                 {% endfor %}
             </ol>
-            </div>
-
-    <footer id="main-footer">
-    <a id="back" href="{% url 'main-page' %}">Back to the main page</a>
-    </footer>
-    </div>
+        </div>
 {% endblock content %}

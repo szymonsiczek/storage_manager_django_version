@@ -19,7 +19,7 @@
 
     <h3>Choose an item to delete:</h3>
 
-    <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+    <div id="delete_item_div">
         <form action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
         <select name="id" id="">
@@ -34,7 +34,7 @@
 
     <h3> Or type an ID of item that you want to remove</h3> 
 
-    <div style="text-align: center; margin-top: 40px;">
+    <div id="delete_item_div">
         <form action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
             <input type="text" name="id" value=""> </input>
@@ -42,8 +42,4 @@
             <button id="redbutton" type="submit">Delete</button>
         </form>
     </div>
-
-
-
-    <p id="main-footer"><a id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
 {% endblock content %}

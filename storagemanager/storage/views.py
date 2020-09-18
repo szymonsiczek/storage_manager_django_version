@@ -28,15 +28,8 @@ def show_items_from_category(request):
     item_set = set()                      
     for item in Item.objects.all():
         item_set.add(item.category)
-    categories = {'categories': item_set }
-    return render(request, 'storage/show_items_from_category.html', categories)
-
-def show_items_from_chosen_category(request):
-    item_set = set()              #repeated code!!!
-    for item in Item.objects.all():
-        item_set.add(item.category)
     items_to_show = {'items_to_show': Item.objects.filter(category=request.POST.get('category')), 'categories': item_set}
-    return render(request, 'storage/show_items_from_chosen_category.html', items_to_show)
+    return render(request, 'storage/show_items_from_category.html', items_to_show)
 
 def delete_item(request):
     context = {'all_items': sorted(Item.objects.all(), key=attrgetter('category', 'type', 'model'))}
@@ -56,10 +49,17 @@ def delete_item_confirm(request):
 def delete_item_after_confirm(request):
     item_var = Item.objects.filter(id=request.POST.get('id')).first()
     Item.objects.filter(id=request.POST.get('id')).first().delete()
-    messages.success(request, f'Item {item_var} has been deleted')
+    messages.success(request, f'Item: {item_var.type} {item_var.model}, SN: {item_var.serial_number} has been deleted')
     return redirect('delete-item')
 
 def delete_all_items(request):
-    return render(request, 'storage/delete_all_items.html')
+    if request.method == 'POST':
+        if request.POST.get('delete_all_confirmation') == 'yes':
+            for item in Item.objects.all():
+                item.delete()
+            messages.success(request, 'All items were deleted')
+            return render(request, 'storage/delete_all_items.html')
+    else:       
+        return render(request, 'storage/delete_all_items.html')
 
 
