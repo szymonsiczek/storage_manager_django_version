@@ -7,4 +7,4 @@ class Item(models.Model):
     serial_number = models.CharField(max_length=20)
 
     def __str__(self):
-        return f'({self.category}) {self.type}, {self.model}, {self.serial_number}'
+        return f'({self.category}) {self.type}, {self.model}, [SN: {self.serial_number}]'
