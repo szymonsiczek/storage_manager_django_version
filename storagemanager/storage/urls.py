@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from storage.views import ShowAllListView, AddItemCreateView
+from .views import ShowAllListView, AddItemCreateView
 
 
 urlpatterns = [

@@ -1,9 +1,10 @@
+from operator import attrgetter
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import ListView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Item
-from operator import attrgetter
+
 
 
 def main_page(request):
@@ -25,11 +26,15 @@ class ShowAllListView(ListView):
     ordering = ['category', 'type']
 
 def show_items_from_category(request):
-    item_set = set()                      
+    categories_set = set()                      
     for item in Item.objects.all():
-        item_set.add(item.category)
-    items_to_show = {'items_to_show': Item.objects.filter(category=request.POST.get('category')), 'categories': item_set}
-    return render(request, 'storage/show_items_from_category.html', items_to_show)
+        categories_set.add(item.category)
+    sorted_items = sorted(Item.objects.filter(category=request.POST.get('category')), key=attrgetter('type', 'model'))
+    context = {
+        'items_to_show': sorted_items, 
+        'categories': categories_set
+        }
+    return render(request, 'storage/show_items_from_category.html', context)
 
 def delete_item(request):
     context = {'all_items': sorted(Item.objects.all(), key=attrgetter('category', 'type', 'model'))}
@@ -37,11 +42,15 @@ def delete_item(request):
 
 def delete_item_confirm(request):
     try:
-        context = {'item_to_delete': str(Item.objects.filter(id=request.POST.get('id')).first()), 'id': request.POST.get('id')}
+        context = {
+            'item_to_delete': str(Item.objects.filter(id=request.POST.get('id')).first()), 
+            'id': request.POST.get('id')
+            }
         if context.get('item_to_delete').startswith('None'):
             messages.warning(request, f'Item with that ID could not be found.')
             return redirect('delete-item')
-        return render(request, 'storage/delete_item_confirm.html', context)
+        else:
+            return render(request, 'storage/delete_item_confirm.html', context)
     except ValueError:
         messages.warning(request, f'Please type a number')
         return redirect('delete-item')
