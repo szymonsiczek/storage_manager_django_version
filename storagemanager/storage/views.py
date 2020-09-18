@@ -1,9 +1,10 @@
+from operator import attrgetter
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import ListView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Item
-from operator import attrgetter
+
 
 
 def main_page(request):
@@ -23,9 +24,17 @@ class ShowAllListView(ListView):
     template_name = 'storage/show_all.html'
     context_object_name = 'all_items'
     ordering = ['category', 'type']
-    
+
 def show_items_from_category(request):
-    return render(request, 'storage/show_items_from_category.html')
+    categories_set = set()                      
+    for item in Item.objects.all():
+        categories_set.add(item.category)
+    sorted_items = sorted(Item.objects.filter(category=request.POST.get('category')), key=attrgetter('type', 'model'))
+    context = {
+        'items_to_show': sorted_items, 
+        'categories': categories_set
+        }
+    return render(request, 'storage/show_items_from_category.html', context)
 
 def delete_item(request):
     context = {'all_items': sorted(Item.objects.all(), key=attrgetter('category', 'type', 'model'))}
@@ -33,23 +42,33 @@ def delete_item(request):
 
 def delete_item_confirm(request):
     try:
-        context = {'item_to_delete': str(Item.objects.filter(id=request.POST.get('id')).first()), 'id': request.POST.get('id')}
+        context = {
+            'item_to_delete': str(Item.objects.filter(id=request.POST.get('id')).first()), 
+            'id': request.POST.get('id')
+            }
         if context.get('item_to_delete').startswith('None'):
             messages.warning(request, f'Item with that ID could not be found.')
             return redirect('delete-item')
-        return render(request, 'storage/delete_item_confirm.html', context)
+        else:
+            return render(request, 'storage/delete_item_confirm.html', context)
     except ValueError:
         messages.warning(request, f'Please type a number')
         return redirect('delete-item')
 
-
 def delete_item_after_confirm(request):
     item_var = Item.objects.filter(id=request.POST.get('id')).first()
     Item.objects.filter(id=request.POST.get('id')).first().delete()
-    messages.success(request, f'Item {item_var} has been deleted')
+    messages.success(request, f'Item: {item_var.type} {item_var.model}, SN: {item_var.serial_number} has been deleted')
     return redirect('delete-item')
 
 def delete_all_items(request):
-    return render(request, 'storage/delete_all_items.html')
+    if request.method == 'POST':
+        if request.POST.get('delete_all_confirmation') == 'yes':
+            for item in Item.objects.all():
+                item.delete()
+            messages.success(request, 'All items were deleted')
+            return render(request, 'storage/delete_all_items.html')
+    else:       
+        return render(request, 'storage/delete_all_items.html')
 
 

@@ -1,7 +1,26 @@
 {% extends "storage/base.html" %}
 
 {% block content %}
-    <h3> This page lets user delete all items</h3> 
 
-    <p id="main-footer"><a id="back" id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
+{% if messages %}
+    {% for message in messages %}
+        <div class="delete-info">
+            <h4 class="">{{ message }} </h4>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+    <div class="centered">
+        <h3>Are you sure that you want to delete all items?</h3>
+        <br>
+        <br>
+        <br>
+        <form action=" {% url 'delete-all-items' %}" method="POST">
+        {% csrf_token %}
+            <button type="submit" name="delete_all_confirmation" value="yes" id="redbutton">Delete all</button>
+        </form> 
+        <a href="{% url 'main-page' %}"><button id="bluebutton">Cancel</button></a>        
+    </div>
+
 {% endblock content %}

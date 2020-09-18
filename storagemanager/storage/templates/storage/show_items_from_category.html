@@ -1,7 +1,32 @@
 {% extends "storage/base.html" %}
 
 {% block content %}
-    <h3> This page shows items from certain category</h3> 
 
-    <p id="main-footer"><a id="back" href="{% url 'main-page' %}">Back to the main page</a></p>
+<div class="centered">
+    <br>
+    <br>
+    <br>
+    <form action="{% url 'show-items-from-category' %}" method="POST">
+        {% csrf_token %}
+        <select name="category">
+            <option selected value="None">Choose category</option>
+            {% for category in categories %}
+            <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" id="bluebutton">Show Items</button>
+    </form> 
+    
+    <div class="all_items">
+        <ol>
+        {% if items_to_show %}
+            {% for item in items_to_show %}
+            <li class="item_list">{{ item }} <small class="id">(id: {{ item.id }})</small></li>
+            {% endfor %}
+        {% endif %}
+        </ol>
+    </div>    
+</div>
+
 {% endblock content %}
