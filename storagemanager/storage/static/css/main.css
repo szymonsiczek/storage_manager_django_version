@@ -98,10 +98,12 @@ button:active {
     text-align: left;
     border: 1px white solid;
     padding-left: 38%;
-
 }
 
+select#id_category {
+    width: 164.8px;
 
+}
 
 small.id {
     size: 4pt;
