@@ -26,9 +26,7 @@ class ShowAllListView(ListView):
     ordering = ['category', 'type', 'model']
 
 def show_items_from_category(request):
-    categories_set = set()                      
-    for item in Item.objects.all():
-        categories_set.add(item.category)
+    categories_set = sorted(Item.objects.values_list('category', flat=True).distinct())                     
     sorted_items = Item.objects.filter(category=request.POST.get('category')).order_by('type', 'model')
     context = {
         'items_to_show': sorted_items, 
