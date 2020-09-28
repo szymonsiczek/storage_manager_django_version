@@ -38,7 +38,7 @@
     <div id="delete_item_div">
         <form action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
-            <input type="text" name="id" value=""> </input>
+            <input type="number" name="id" value=""> </input>
             <br>
             <button id="redbutton" type="submit">Delete</button>
         </form>
