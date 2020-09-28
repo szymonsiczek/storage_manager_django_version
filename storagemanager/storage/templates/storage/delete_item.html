@@ -23,6 +23,7 @@
         <form action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
         <select name="id" id="">
+            <option selected value="Choose_item">Choose item</option>
             {% for item in all_items %}
                 <option value="{{ item.id }}">{{ item }}  id: {{ item.id }}</option>
             {% endfor %}

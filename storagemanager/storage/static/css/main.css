@@ -93,11 +93,16 @@ button:active {
 }    
 
 .all_items {
-    width: 750px;
+    width: auto;
     margin: auto;
-    text-align: center;
+    text-align: left;
+    border: 1px white solid;
+    padding-left: 38%;
 
 }
+
+
+
 small.id {
     size: 4pt;
     font-style: italic;
@@ -185,7 +190,14 @@ form #adding_item_form {
 }
 
 div.centered {
-    text-align: center;
+    text-align: center; 
+}
+
+div#adding_item_form {
+    text-align: right; 
+    margin-left: 38%; 
+    margin-right: 40%;
+    padding-right: 3%;
 }
 
 #delete_item_div {

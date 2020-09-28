@@ -6,7 +6,7 @@
     <div class="centered">
         <form id="adding_item_form" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div id="adding_item_form">{{ form.as_p }}</div>
             <button id="bluebutton" type="submit">Add item</button>
         </form>
     </div>

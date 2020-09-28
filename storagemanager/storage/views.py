@@ -1,4 +1,3 @@
-from operator import attrgetter
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import ListView, CreateView, DeleteView
@@ -29,7 +28,7 @@ def show_items_from_category(request):
     categories_set = set()                      
     for item in Item.objects.all():
         categories_set.add(item.category)
-    sorted_items = sorted(Item.objects.filter(category=request.POST.get('category')), key=attrgetter('type', 'model'))
+    sorted_items = Item.objects.filter(category=request.POST.get('category')).order_by('type', 'model')
     context = {
         'items_to_show': sorted_items, 
         'categories': categories_set
@@ -37,10 +36,13 @@ def show_items_from_category(request):
     return render(request, 'storage/show_items_from_category.html', context)
 
 def delete_item(request):
-    context = {'all_items': sorted(Item.objects.all(), key=attrgetter('category', 'type', 'model'))}
+    context = {'all_items': Item.objects.all().order_by('category', 'type', 'model')}
     return render(request, 'storage/delete_item.html', context)
 
 def delete_item_confirm(request):
+    if request.POST.get('id') == 'Choose_item':
+        messages.warning(request, f'Please choose an item from the list.')
+        return redirect('delete-item')
     try:
         context = {
             'item_to_delete': str(Item.objects.filter(id=request.POST.get('id')).first()), 
