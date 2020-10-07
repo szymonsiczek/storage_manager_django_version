@@ -6,12 +6,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Item
 
 
-
 def main_page(request):
     return render(request, 'storage/main.html')
 
+
 def add_item(request):
     return render(request, 'storage/add_item.html')
+
 
 class AddItemCreateView(CreateView):
     model = Item
@@ -19,26 +20,32 @@ class AddItemCreateView(CreateView):
     fields = ['category', 'type', 'model', 'serial_number']
     success_url = '/'
 
+
 class ShowAllListView(ListView):
     model = Item
     template_name = 'storage/show_all.html'
     context_object_name = 'all_items'
     ordering = ['category', 'type', 'model']
 
+
 def show_items_from_category(request):
-    categories_set = set()                      
-    for item in Item.objects.all():
-        categories_set.add(item.category)
-    sorted_items = Item.objects.filter(category=request.POST.get('category')).order_by('type', 'model')
+    chosen_category = request.POST.get('category')
+    categories_set = sorted(Item.objects.values_list(
+        'category', flat=True).distinct())
+    sorted_items = Item.objects.filter(
+        category=chosen_category).order_by('type', 'model')
     context = {
-        'items_to_show': sorted_items, 
+        'items_to_show': sorted_items,
         'categories': categories_set
-        }
+    }
     return render(request, 'storage/show_items_from_category.html', context)
 
+
 def delete_item(request):
-    context = {'all_items': Item.objects.all().order_by('category', 'type', 'model')}
+    context = {'all_items': Item.objects.all().order_by(
+        'category', 'type', 'model')}
     return render(request, 'storage/delete_item.html', context)
+
 
 def delete_item_confirm(request):
     if request.POST.get('id') == '':
@@ -59,9 +66,9 @@ def delete_item_confirm(request):
     except ObjectDoesNotExist:
         item_to_delete = None
     context = {
-        'item_to_delete': item_to_delete, 
+        'item_to_delete': item_to_delete,
         'id': item_id
-        }
+    }
     if context.get('item_to_delete') == None:
         messages.warning(request, f'Item with that ID could not be found.')
         return redirect('delete-item')
@@ -75,8 +82,10 @@ def delete_item_after_confirm(request):
     item_to_delete_model = item_to_delete.model
     item_to_delete_serial_number = item_to_delete.serial_number
     item_to_delete.delete()
-    messages.success(request, f'Item: {item_to_delete_type} {item_to_delete_model}, SN: {item_to_delete_serial_number} has been deleted')
+    messages.success(
+        request, f'Item: {item_to_delete_type} {item_to_delete_model}, SN: {item_to_delete_serial_number} has been deleted')
     return redirect('delete-item')
+
 
 def delete_all_items(request):
     if request.method == 'POST':
@@ -84,7 +93,5 @@ def delete_all_items(request):
             Item.objects.all().delete()
             messages.success(request, 'All items were deleted')
             return render(request, 'storage/delete_all_items.html')
-    else:       
+    else:
         return render(request, 'storage/delete_all_items.html')
-
-
