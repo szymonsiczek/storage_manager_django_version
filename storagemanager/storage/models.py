@@ -1,12 +1,13 @@
 from django.db import models
 
+
 class Item(models.Model):
     EXTRA = 'Extra'
     LIGHT = 'Light'
     POWER = 'Power'
     SOUND = 'Sound'
     STAGE = 'Stage'
-    
+
     CATEGORIES = [
         (EXTRA, 'Extra'),
         (LIGHT, 'Light'),
@@ -26,8 +27,3 @@ class Item(models.Model):
 
     def __str__(self):
         return f'({self.category}) {self.type}, {self.model}, [SN: {self.serial_number}]'
-
-    def say_hello(self):
-        return f'My type is {self.type} my model is {self.model}.'
-        
-
