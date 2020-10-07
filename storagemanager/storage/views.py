@@ -78,12 +78,12 @@ def delete_item_confirm(request):
 
 def delete_item_after_confirm(request):
     item_to_delete = Item.objects.get(id=request.POST.get('id'))
-    item_to_delete_type = item_to_delete.type
-    item_to_delete_model = item_to_delete.model
-    item_to_delete_serial_number = item_to_delete.serial_number
+    type = item_to_delete.type
+    model = item_to_delete.model
+    serial_number = item_to_delete.serial_number
     item_to_delete.delete()
     messages.success(
-        request, f'Item: {item_to_delete_type} {item_to_delete_model}, SN: {item_to_delete_serial_number} has been deleted')
+        request, f'Item: {type} {model}, SN: {serial_number} has been deleted')
     return redirect('delete-item')
 
 
