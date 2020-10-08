@@ -1,2 +1,3 @@
 myvenv
 *.pyc
+storagemanager/db.sqlite3
