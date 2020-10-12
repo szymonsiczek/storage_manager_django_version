@@ -4,3 +4,4 @@ storagemanager/storage/__pycache__/
 storagemanager/storage/migrations/__pycache__/
 storagemanager/storagemanager/__pycache__/
 storagemanager/db.sqlite3
+*/__pycache__/*
