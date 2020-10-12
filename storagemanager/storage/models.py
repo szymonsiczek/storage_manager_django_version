@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Item(models.Model):
     category = models.CharField(max_length=100)
     type = models.CharField(max_length=160)
