@@ -20,27 +20,27 @@
     <h3>Choose an item to delete:</h3>
 
     <div id="delete_item_div">
-        <form action="{% url 'delete-item-confirm' %}" method="POST">
+        <form name="item_list" action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
         <select name="id" id="">
-            <option selected value="list_item_Choose_item">Choose item</option>
+            <option selected value="Choose_item">Choose item</option>
             {% for item in all_items %}
-                <option value="list_item_{{ item.id }}">{{ item }}  id: {{ item.id }}</option>
+                <option value="{{ item.id }}">{{ item }}  id: {{ item.id }}</option>
             {% endfor %}
         </select>
         <br>
-        <button id="redbutton" type="submit">Delete</button>
+        <button name="item_list" id="redbutton" type="submit">Delete</button>
         </form>
     </div>
 
     <h3> Or type an ID of item that you want to remove</h3> 
 
     <div id="delete_item_div">
-        <form action="{% url 'delete-item-confirm' %}" method="POST">
+        <form name="user_input" action="{% url 'delete-item-confirm' %}" method="POST">
             {% csrf_token %}
             <input required type="number" name="id" value=""> </input>
             <br>
-            <button id="redbutton" type="submit">Delete</button>
+            <button name="user_input" id="redbutton" type="submit">Delete</button>
         </form>
     </div>
 {% endblock content %}

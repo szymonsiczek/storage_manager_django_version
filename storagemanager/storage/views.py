@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Item
 
 
+
 def main_page(request):
     return render(request, 'storage/main.html')
 
@@ -47,8 +48,8 @@ def delete_item(request):
     return render(request, 'storage/delete_item.html', context)
 
 
-def __was_item_chosen_from_the_list(chosen_item):
-    if chosen_item.startswith('list_item_'):
+def __was_item_chosen_from_the_list(chosen_item, request):
+    if 'item_list' in request.POST:
         return True
     else:
         return False
@@ -75,35 +76,40 @@ def __is_item_in_database(item_id):
     except ObjectDoesNotExist:
         return None
 
+def __was_item_provided_by_user(chosen_item, request):
+        if 'user_input' in request.POST:
+            return True
+        else:
+            return False
+
 
 def delete_item_confirm(request):
     chosen_item = request.POST.get('id')
     
     #Check if item to delete was chosen from the list
-    if __was_item_chosen_from_the_list(chosen_item):
-        item_id = chosen_item.lstrip('list_item_')
+    if __was_item_chosen_from_the_list(chosen_item, request):
         #Reject if option chosen from the list is not actual item
-        if __is_invalid(item_id):
+        if __is_invalid(chosen_item):
             messages.warning(
                 request, f'Please choose an item from the list.')
             return redirect('delete-item')
 
     #If id was provided by the user, not chosen from the list:
-    else:
-        #Check id id was typed as an exponent number
+    elif __was_item_provided_by_user(chosen_item, request):
+        #Check if id wasn't typed as an exponent number (as html input with a "number" type allows it)
         if __is_not_exponent_number(chosen_item):
-            item_id = chosen_item
+            pass
         else:
             #Reject if id was typed as an exponent number
             messages.warning(request, f'Exponent numbers are not allowed')
             return redirect('delete-item')
             
     #Look for an item in database and delete item if it exists
-    item_to_delete = __is_item_in_database(item_id)
+    item_to_delete = __is_item_in_database(chosen_item)
     if item_to_delete:
         context = {
             'item_to_delete': item_to_delete,
-            'id': item_id
+            'id': chosen_item
         }
         return render(request, 'storage/delete_item_confirm.html', context)
     else:
