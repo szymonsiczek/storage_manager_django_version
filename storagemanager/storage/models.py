@@ -8,19 +8,18 @@ class Item(models.Model):
     SOUND = 'Sound'
     STAGE = 'Stage'
     
-    CATEGORIES = [
+    CATEGORIES = (
         (EXTRA, 'Extra'),
         (LIGHT, 'Light'),
         (POWER, 'Power'),
         (SOUND, 'Sound'),
         (STAGE, 'Stage'),
-    ]
+    )
     category = models.CharField(
         max_length=10,
         choices=CATEGORIES,
         default=EXTRA,
     )
-    # category = models.CharField(max_length=100)
     type = models.CharField(max_length=160)
     model = models.CharField(max_length=160)
     serial_number = models.CharField(max_length=20)
