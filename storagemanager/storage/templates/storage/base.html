@@ -13,6 +13,21 @@
     </div>
 
     <body>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="success_message">
+                        <h4 class="">{{ message }} </h4>
+                    </div>
+
+                {% elif message.tags == 'warning' %}
+                    <div class="warning_message">
+                        <h4 class="">{{ message }} </h4>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         {% block content %} {% endblock %}
     </body>
 </html>

@@ -21,6 +21,22 @@ h3 {
   margin: auto;
 }
 
+.registration_form {
+  width: 700px;
+  margin: auto;
+  text-align: left;
+  font-family: Tahoma, Geneva, sans-serif;
+  padding: 20px;
+}
+
+.small_adnotation {
+  padding-top: 30px;
+  width: 350px;
+  margin: auto;
+  text-align: center;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
 .button {
   font-family: Tahoma, Geneva, sans-serif;
   background-color: white;
@@ -156,7 +172,7 @@ a.cancel-deleting-button:visited {
   color: white;
 }
 
-.delete-info {
+.success_message {
   text-align: center;
   width: 520px;
   height: 50px;
@@ -170,7 +186,7 @@ a.cancel-deleting-button:visited {
   letter-spacing: 1px;
 }
 
-.wrong-value-type {
+.warning_message {
   text-align: center;
   width: 520px;
   height: 50px;

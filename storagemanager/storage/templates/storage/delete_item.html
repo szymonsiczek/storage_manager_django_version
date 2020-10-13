@@ -1,22 +1,6 @@
 {% extends "storage/base.html" %}
 
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-            <div class="delete-info">
-                <h4 class="">{{ message }} </h4>
-            </div>
-
-            {% elif message.tags == 'warning' %}
-            <div class="wrong-value-type">
-                <h4 class="">{{ message }} </h4>
-            </div>
-
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
     <h3>Choose an item to delete:</h3>
 
     <div id="delete_item_div">

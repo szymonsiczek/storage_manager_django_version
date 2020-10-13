@@ -1,0 +1,19 @@
+{% extends "storage/base.html" %}
+
+{% block content %}
+    <div class="registration_form">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Register here</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <div class="centered"><button id="bluebutton" type="submit" >Register</button></div>
+        </form>
+        <div class="small_adnotation" >
+            <small>
+                Already have an account? <a href="#">Sign In</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}
