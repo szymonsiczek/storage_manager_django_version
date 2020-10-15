@@ -1,5 +1,6 @@
 {% extends "storage/base.html" %}
 
+
 {% block content %}
     <div class="registration_form">
         <form method="POST">
@@ -12,7 +13,7 @@
         </form>
         <div class="small_adnotation" >
             <small>
-                Already have an account? <a href="#">Sign In</a>
+                Already have an account? <a href="{% url 'login' %}">Sign In</a>
             </small>
         </div>
     </div>

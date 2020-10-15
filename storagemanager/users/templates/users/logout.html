@@ -1,0 +1,11 @@
+{% extends "storage/base.html" %}
+
+
+{% block content %}
+<div class="login_form">
+<h2>You have been logged out</h2>
+<div class="small_adnotation" >
+    <a class="small_adnotation" href="{% url 'login' %}">Log In Again</a>
+</div>
+</div>
+{% endblock content %}

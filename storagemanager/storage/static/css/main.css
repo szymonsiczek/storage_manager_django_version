@@ -1,7 +1,6 @@
 .main {
   background: #0066cc;
   min-height: 160px;
-  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -29,12 +28,29 @@ h3 {
   padding: 20px;
 }
 
+.login_form {
+  width: 400px;
+  margin: auto;
+  text-align: center;
+  font-family: Tahoma, Geneva, sans-serif;
+  padding: 20px;
+}
+
 .small_adnotation {
   padding-top: 30px;
   width: 350px;
   margin: auto;
   text-align: center;
   font-family: Tahoma, Geneva, sans-serif;
+}
+
+a.small_adnotation:visited {
+  color: #0066cc;
+}
+
+fieldset {
+  border: 1px rgb(137, 137, 137, 0.5) solid;
+  opacity: ;
 }
 
 .button {
@@ -226,4 +242,24 @@ div#adding_item_form {
   margin-bottom: 15px;
   font-size: 13px;
   font-family: Tahoma, Geneva, sans-serif;
+}
+
+.topnav {
+  background-color: black;
+  height: 0px;
+  text-align: right;
+}
+
+.topnav a {
+  float: inline-end;
+  color: white;
+  padding-right: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+.topnav a:hover {
+  background-color: white;
+  color: #0066cc;
 }
