@@ -263,3 +263,37 @@ div#adding_item_form {
   background-color: white;
   color: #0066cc;
 }
+
+.form_field_label {
+  color: black;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.form_field_input input {
+  width: 90%;
+  height: 30px;
+  margin-top: 5px;
+  border: gray 2px solid;
+}
+
+.form_field_help_text {
+  color: black;
+  font-size: 10px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.form_field_help_text li {
+  color: black;
+  font-size: 10px;
+  font-style: italic;
+}
+
+.login_form_field_input input {
+  width: 90%;
+  height: 30px;
+  margin-top: 5px;
+  border: gray 2px solid;
+  margin-bottom: 20px;
+}
