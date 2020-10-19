@@ -7,7 +7,9 @@
             {% csrf_token %}
             <fieldset>
                 <legend>Register here</legend>
+                {{ form.non_field_errors }}
                 {% for field in form %}
+                <span class="form_error">{{ field.errors }}</span>
                 <span class="form_field_label">{{ field.label }}</span>
                 <div class="form_field_input">{{ field }}</div>
                 <div class="form_field_help_text">{{ field.help_text }}</div>

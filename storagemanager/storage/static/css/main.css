@@ -50,7 +50,6 @@ a.small_adnotation:visited {
 
 fieldset {
   border: 1px rgb(137, 137, 137, 0.5) solid;
-  opacity: ;
 }
 
 .button {
@@ -268,6 +267,7 @@ div#adding_item_form {
   color: black;
   font-size: 20px;
   padding-left: 10px;
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 .form_field_input input {
@@ -275,6 +275,12 @@ div#adding_item_form {
   height: 30px;
   margin-top: 5px;
   border: gray 2px solid;
+  border-radius: 10px;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0px 0px 6px #0066cc;
 }
 
 .form_field_help_text {
@@ -296,4 +302,16 @@ div#adding_item_form {
   margin-top: 5px;
   border: gray 2px solid;
   margin-bottom: 20px;
+}
+
+.form_error {
+  color: red;
+  font-size: 12px;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+.form_error li {
+  color: red;
+  font-size: 12px;
+  font-family: Tahoma, Geneva, sans-serif;
 }

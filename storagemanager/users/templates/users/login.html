@@ -8,6 +8,9 @@
         <fieldset>
             <legend>Log In</legend>
             {% for field in form %}
+                {% if form.errors %}
+                <p class="form_error">Your username and password didn't match. Please try again.</p>
+                {% endif %}
                 <span class="form_field_label">{{ field.label }}</span>
                 <div class="login_form_field_input">{{ field }}</div>
                 {% endfor %}
