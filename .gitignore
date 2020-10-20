@@ -3,5 +3,7 @@ storagemanager/storage/__pycache__/
 storagemanager/storage/migrations/__pycache__/
 storagemanager/storagemanager/__pycache__/
 storagemanager/db.sqlite3
+storagemanager/profile_pics/
+storagemanager/media/profile_pics/
 */__pycache__/*
 *.pyc

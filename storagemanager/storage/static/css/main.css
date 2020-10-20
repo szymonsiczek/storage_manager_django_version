@@ -302,6 +302,7 @@ input:focus {
   margin-top: 5px;
   border: gray 2px solid;
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .form_error {
@@ -314,4 +315,42 @@ input:focus {
   color: red;
   font-size: 12px;
   font-family: Tahoma, Geneva, sans-serif;
+}
+
+.profile_pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.profile_photo {
+  width: 200px;
+  height: 200px;
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.div_profile_username {
+  position: relative;
+  width: 300px;
+  height: 30px;
+  margin-left: 270px;
+  top: -205px;
+}
+
+.profile_username {
+  font-size: xx-large;
+  font: Tahoma, Geneva, sans-serif;
+  padding: auto;
+  position: absolute;
+  top: 0px;
+}
+
+.div_profile_additional_info {
+  position: relative;
+  width: 300px;
+  height: auto;
+  margin-left: 270px;
+  top: -200px;
+  font-style: italic;
 }
