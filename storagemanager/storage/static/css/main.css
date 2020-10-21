@@ -348,9 +348,10 @@ input:focus {
 
 .div_profile_additional_info {
   position: relative;
-  width: 300px;
+  width: 700px;
   height: auto;
   margin-left: 270px;
   top: -200px;
   font-style: italic;
+  border: none;
 }

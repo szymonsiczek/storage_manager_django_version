@@ -1,13 +1,52 @@
 {% extends "storage/base.html" %}
 {% block content %}
 <div class="profile_photo">
-        <img class="profile_pic" src="{{ user.profile.image.url }}" alt="">
+        <img class="profile_pic" src="{{ user.profile.image.url }}" alt="Profile Picture">
 </div>
-<div class="div_profile_username">
+<!-- <div class="div_profile_username">
     <span class="profile_username">{{ user.username }}</span>
-</div>
+</div> -->
 <div class="div_profile_additional_info">
-        <p>email: {{ user.email }}</p>
-        <p>tel. {{ user.profile.phone_number }}</p>    
+        <!-- <p>email: {{ user.email }}</p>
+        <p>tel. {{ user.profile.phone_number }}</p>     -->
+        <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                        <legend>Update info</legend>
+                        {{ u_form.non_field_errors }}
+                        {{ p_form.non_field_errors }}
+                        {% for field in u_form %}
+                        <span class="form_error">{{ field.errors }}</span>
+                        <span class="form_field_label">{{ field.label }}</span>
+                        <div class="form_field_input">{{ field }}</div>
+                        <div class="form_field_help_text">{{ field.help_text }}</div>
+                        {% endfor %}
+                        <!-- {{ p_form }} -->
+                        {% for field in p_form %}
+                        <span class="form_error">{{ field.errors }}</span>
+                        {% if field.label == 'Image' %}
+                                <span class="form_field_label">{{ field.label }}</span>
+                                <div>{{ field }}</div>
+                        {% else %}
+                                <span class="form_field_label">{{ field.label }}</span>
+                                <div class="form_field_input">{{ field }}</div>
+                        {% endif %}
+                        <div class="form_field_help_text">{{ field.help_text }}</div>
+                        {% endfor %}
+                </fieldset>
+                <div class="centered"><button id="bluebutton" type="submit" >Update</button></div>
+            </form>
 </div>
+<!-- <div class="registration_form">
+        <!-- <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Profile Info</legend>
+                {{ u_form }}
+                {{ p_form }}
+            </fieldset>
+            <div class="centered"><button id="bluebutton" type="submit" >Update</button></div>
+        </form> -->
+    <!-- </div> --> 
+
 {% endblock content %}
