@@ -28,6 +28,10 @@ h3 {
   padding: 20px;
 }
 
+a #buttonlink {
+  text-decoration: none;
+}
+
 .login_form {
   width: 400px;
   margin: auto;
@@ -332,8 +336,8 @@ input:focus {
   border-radius: 50%;
 }
 
-.profile_photo {
-  width: 200px;
+.div_profile_photo {
+  width: 700px;
   height: 200px;
   margin-top: 50px;
   margin-left: 50px;
@@ -362,5 +366,21 @@ input:focus {
   margin-left: 270px;
   top: -200px;
   font-style: italic;
-  border: none;
+}
+
+.update_profile_button {
+  position: relative;
+  width: 700px;
+  height: auto;
+  margin-left: 270px;
+  top: -188px;
+}
+
+#cancel_updating_profile {
+  width: 150px;
+  text-align: center;
+  position: relative;
+  left: -250px;
+  left: -22px;
+  top: -90px;
 }

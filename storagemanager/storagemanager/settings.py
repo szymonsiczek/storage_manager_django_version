@@ -125,3 +125,4 @@ MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'main-page'
+LOGIN_URL = 'login'

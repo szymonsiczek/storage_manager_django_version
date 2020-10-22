@@ -29,14 +29,14 @@ def register(request):
             phone_number = form.cleaned_data.get('phone_number')
             profile.add_phone_number(phone_number)
 
-            return redirect('login')
+            return redirect('profile')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
 
 @login_required
-def profile(request):
+def profile_update(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(
@@ -59,4 +59,9 @@ def profile(request):
         'p_form': p_form
     }
 
-    return render(request, 'users/profile.html', forms)
+    return render(request, 'users/profile_update.html', forms)
+
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
