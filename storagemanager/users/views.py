@@ -16,7 +16,6 @@ def register(request):
 
             # Automatically log in new user
             username = form.cleaned_data.get('username')
-            phone_number = form.cleaned_data.get('phone_number')
             new_user = authenticate(username=username,
                                     password=form.cleaned_data['password1'],
                                     )
@@ -27,6 +26,7 @@ def register(request):
             # Add phone number to profile
             user = User.objects.get(username=username)
             profile = Profile.find_profile(user)
+            phone_number = form.cleaned_data.get('phone_number')
             profile.add_phone_number(phone_number)
 
             return redirect('login')

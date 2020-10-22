@@ -63,6 +63,7 @@ fieldset {
   display: block;
   font-size: 20px;
   transition: 0.3s;
+  border-radius: 10px;
 }
 
 a.button:hover {
@@ -114,6 +115,7 @@ li {
   color: #0066cc;
   transition: 0.3s;
 }
+
 #bluebutton:hover {
   background-color: #0066cc;
   color: white;
