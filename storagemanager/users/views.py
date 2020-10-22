@@ -2,22 +2,34 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .models import Profile
 
 
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            # Create new user
             form.save()
+
+            # Automatically log in new user
             username = form.cleaned_data.get('username')
-            new_user = authenticate(username=form.cleaned_data['username'],
+            phone_number = form.cleaned_data.get('phone_number')
+            new_user = authenticate(username=username,
                                     password=form.cleaned_data['password1'],
                                     )
             login(request, new_user)
             messages.success(
-                request, f'{username}, your account has been created, now you can log in.')
-            return redirect('profile')
+                request, f'{username}, your account has been created.')
+
+            # Add phone number to profile
+            user = User.objects.get(username=username)
+            profile = Profile.find_profile(user)
+            profile.add_phone_number(phone_number)
+
+            return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
