@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Item
 
 
+
 def main_page(request):
     return render(request, 'storage/main.html')
 
@@ -47,33 +48,73 @@ def delete_item(request):
     return render(request, 'storage/delete_item.html', context)
 
 
-def delete_item_confirm(request):
-    if request.POST.get('id') == '':
-        messages.warning(request, f'Please type a number')
-        return redirect('delete-item')
-    elif 'e' in request.POST.get('id'):
-        messages.warning(request, f'Exponent numbers are not allowed')
-        return redirect('delete-item')
+def __was_item_chosen_from_the_list(chosen_item, request):
+    if 'item_list' in request.POST:
+        return True
     else:
-        item_id = request.POST.get('id')
+        return False
 
-    if item_id == 'Choose_item':
-        messages.warning(request, f'Please choose an item from the list.')
-        return redirect('delete-item')
 
+def __is_invalid(item_id):
+    if item_id != 'Choose_item':
+        return False
+    else:
+        return True
+
+
+def __is_not_exponent_number(chosen_item):
+    if 'e' not in chosen_item:
+        return True
+    else:
+        return False
+
+
+def __is_item_in_database(item_id):
     try:
         item_to_delete = Item.objects.get(id=item_id)
+        return item_to_delete
     except ObjectDoesNotExist:
-        item_to_delete = None
-    context = {
-        'item_to_delete': item_to_delete,
-        'id': item_id
-    }
-    if context.get('item_to_delete') == None:
+        return None
+
+def __was_item_provided_by_user(chosen_item, request):
+        if 'user_input' in request.POST:
+            return True
+        else:
+            return False
+
+
+def delete_item_confirm(request):
+    chosen_item = request.POST.get('id')
+    
+    #Check if item to delete was chosen from the list
+    if __was_item_chosen_from_the_list(chosen_item, request):
+        #Reject if option chosen from the list is not actual item
+        if __is_invalid(chosen_item):
+            messages.warning(
+                request, f'Please choose an item from the list.')
+            return redirect('delete-item')
+
+    #If id was provided by the user, not chosen from the list:
+    elif __was_item_provided_by_user(chosen_item, request):
+        #Check if id wasn't typed as an exponent number (as html input with a "number" type allows it)
+        if __is_not_exponent_number(chosen_item):
+            pass
+        else:
+            #Reject if id was typed as an exponent number
+            messages.warning(request, f'Exponent numbers are not allowed')
+            return redirect('delete-item')
+            
+    #Look for an item in database and delete item if it exists
+    item_to_delete = __is_item_in_database(chosen_item)
+    if item_to_delete:
+        context = {
+            'item_to_delete': item_to_delete,
+            'id': chosen_item
+        }
+        return render(request, 'storage/delete_item_confirm.html', context)
+    else:
         messages.warning(request, f'Item with that ID could not be found.')
         return redirect('delete-item')
-    else:
-        return render(request, 'storage/delete_item_confirm.html', context)
 
 
 def delete_item_after_confirm(request):
