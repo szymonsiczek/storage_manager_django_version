@@ -64,6 +64,13 @@ def delete_item_confirm(request):
         return False
 
 
+def __was_item_chosen_from_the_list(chosen_item, request):
+    if 'item_list' in request.POST:
+        return True
+    else:
+        return False
+
+
 def __is_invalid(item_id):
     if item_id != 'Choose_item':
         return False
