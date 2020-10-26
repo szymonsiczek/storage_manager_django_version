@@ -24,11 +24,6 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-    @classmethod
-    def find_profile(cls, user_instance):
-        profile = cls.objects.get(user=user_instance.id)
-        return profile
-
     def add_phone_number(self, phone_number):
         self.phone_number = phone_number
         self.save()

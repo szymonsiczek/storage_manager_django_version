@@ -8,15 +8,15 @@
                 {% csrf_token %}
                 <fieldset>
                         <legend>Update info</legend>
-                        {{ u_form.non_field_errors }}
-                        {{ p_form.non_field_errors }}
-                        {% for field in u_form %}
+                        {{ user_form.non_field_errors }}
+                        {{ profile_form.non_field_errors }}
+                        {% for field in user_form %}
                         <span class="form_error">{{ field.errors }}</span>
                         <span class="form_field_label">{{ field.label }}</span>
                         <div class="form_field_input">{{ field }}</div>
                         <div class="form_field_help_text">{{ field.help_text }}</div>
                         {% endfor %}
-                        {% for field in p_form %}
+                        {% for field in profile_form %}
                         <span class="form_error">{{ field.errors }}</span>
                         {% if field.label == 'Image' %}
                                 <span class="form_field_label">{{ field.label }}</span>
