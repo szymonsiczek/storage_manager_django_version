@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.db import transaction
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Profile
@@ -17,20 +16,20 @@ def register(request):
                 form.save()
 
                 # Automatically log in new user
-                username = form.cleaned_data.get('username')
-                new_user = authenticate(username=username,
+                user_mail = form.cleaned_data.get('email')
+                new_user = authenticate(username=user_mail,
                                         password=form.cleaned_data['password1'],
                                         )
                 login(request, new_user)
 
                 # Add phone number to profile
-                user = User.objects.get(username=username)
+                user = get_user_model().objects.get(email=user_mail)
                 profile = user.profile
                 phone_number = form.cleaned_data.get('phone_number')
                 profile.add_phone_number(phone_number)
 
                 messages.success(
-                    request, f'{username}, your account has been created.')
+                    request, f'{user.username}, your account has been created.')
 
                 return redirect('profile')
     else:
