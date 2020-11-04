@@ -44,7 +44,6 @@ class UserChangeForm(forms.ModelForm):
 
 
 class UserAdmin(BaseUserAdmin):
-
     form = UserChangeForm
     add_form = UserCreationForm
 
