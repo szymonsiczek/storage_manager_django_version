@@ -3,8 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from .models import Profile
+from .forms import UserRegisterForm, UserUpdateForm
 
 
 def register(request):
@@ -14,23 +13,15 @@ def register(request):
             if form.is_valid():
                 # Create new user
                 form.save()
-
                 # Automatically log in new user
-                user_mail = form.cleaned_data.get('email')
+                user_mail = form.cleaned_data['email']
                 new_user = authenticate(username=user_mail,
                                         password=form.cleaned_data['password1'],
                                         )
                 login(request, new_user)
-
-                # Add phone number to profile
-                user = get_user_model().objects.get(email=user_mail)
-                profile = user.profile
-                phone_number = form.cleaned_data.get('phone_number')
-                profile.add_phone_number(phone_number)
-
+                user_full_name = form.cleaned_data['full_name']
                 messages.success(
-                    request, f'{user.username}, your account has been created.')
-
+                    request, f'{user_full_name}, your account has been created.')
                 return redirect('profile')
     else:
         form = UserRegisterForm()
@@ -40,27 +31,19 @@ def register(request):
 @login_required
 def profile_update(request):
     if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(
-            request.POST,
-            request.FILES,
-            instance=request.user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
+        user_form = UserUpdateForm(
+            request.POST, request.FILES, instance=request.user)
+        if user_form.is_valid():
             user_form.save()
-            profile_form.save()
             messages.success(
                 request, 'Your account has been updated.')
             return redirect('profile')
 
     else:
         user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.profile)
-
     forms = {
-        'user_form': user_form,
-        'profile_form': profile_form
+        'user_form': user_form
     }
-
     return render(request, 'users/profile_update.html', forms)
 
 

@@ -1,7 +1,7 @@
 {% extends "storage/base.html" %}
 {% block content %}
 <div class="div_profile_photo">
-        <img class="profile_pic" src="{{ user.profile.image.url }}" alt="Profile Picture">
+        <img class="profile_pic" src="{{ user.image.url }}" alt="Profile Picture">
 </div>
 <div class="div_profile_additional_info">
         <form method="POST" enctype="multipart/form-data">
@@ -9,23 +9,17 @@
                 <fieldset>
                         <legend>Update info</legend>
                         {{ user_form.non_field_errors }}
-                        {{ profile_form.non_field_errors }}
                         {% for field in user_form %}
-                        <span class="form_error">{{ field.errors }}</span>
-                        <span class="form_field_label">{{ field.label }}</span>
-                        <div class="form_field_input">{{ field }}</div>
-                        <div class="form_field_help_text">{{ field.help_text }}</div>
-                        {% endfor %}
-                        {% for field in profile_form %}
                         <span class="form_error">{{ field.errors }}</span>
                         {% if field.label == 'Image' %}
                                 <span class="form_field_label">{{ field.label }}</span>
                                 <div>{{ field }}</div>
                         {% else %}
-                                <span class="form_field_label">{{ field.label }}</span>
-                                <div class="form_field_input">{{ field }}</div>
+                        <span class="form_field_label">{{ field.label }}</span>
+                        <div class="form_field_input">{{ field }}</div>
                         {% endif %}
                         <div class="form_field_help_text">{{ field.help_text }}</div>
+                        <span class="form_error">{{ field.errors }}</span>
                         {% endfor %}
                 </fieldset>
                 <div class="centered"><button id="bluebutton" type="submit" >Update</button></div> 
