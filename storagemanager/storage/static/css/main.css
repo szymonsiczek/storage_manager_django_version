@@ -35,7 +35,7 @@ a #buttonlink {
 .login_form {
   width: 400px;
   margin: auto;
-  text-align: center;
+  text-align: left;
   font-family: Tahoma, Geneva, sans-serif;
   padding: 20px;
 }
@@ -281,6 +281,7 @@ div#adding_item_form {
   font-size: 20px;
   padding-left: 10px;
   font-family: Tahoma, Geneva, sans-serif;
+  margin-top: 10px;
 }
 
 .form_field_input input {
@@ -384,4 +385,10 @@ input:focus {
   left: -250px;
   left: -22px;
   top: -90px;
+}
+
+legend {
+  font-size: 12px;
+  font-style: italic;
+  margin-bottom: 15px;
 }

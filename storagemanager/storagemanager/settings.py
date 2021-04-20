@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,5 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'main-page'
 LOGIN_URL = 'login'
+
+AUTH_USER_MODEL = 'users.user'
