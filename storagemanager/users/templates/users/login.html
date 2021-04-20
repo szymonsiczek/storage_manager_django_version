@@ -1,0 +1,26 @@
+{% extends "storage/base.html" %}
+
+
+{% block content %}
+<div class="login_form">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Log In</legend>
+            {% for field in form %}
+                {% if form.errors %}
+                <p class="form_error">Your username and password didn't match. Please try again.</p>
+                {% endif %}
+                <span class="form_field_label">{{ field.label }}</span>
+                <div class="login_form_field_input">{{ field }}</div>
+                {% endfor %}
+        </fieldset>
+        <div class="centered"><button id="bluebutton" type="submit" >Log In</button></div>
+    </form>
+    <div class="small_adnotation" >
+        <small>
+            Do you need an account? <a href="{% url 'register' %}">Register here.</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "storage/base.html" %}
+{% block content %}
+<div class="div_profile_photo">
+        <img class="profile_pic" src="{{ user.profile.image.url }}" alt="Profile Picture">
+</div>
+<div class="div_profile_username">
+    <span class="profile_username">{{ user.username }}</span>
+</div>
+<div class="div_profile_additional_info">
+        <p>email: {{ user.email }}</p>
+        <p>tel. {{ user.profile.phone_number }}</p>    
+</div>
+<div class="update_profile_button">
+        <form action="{% url 'profile-update' %}">
+        <button id="bluebutton">Update profile
+        </button> 
+        </form>
+</div>
+{% endblock content %}

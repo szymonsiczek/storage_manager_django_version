@@ -1,0 +1,26 @@
+{% extends "storage/base.html" %}
+
+
+{% block content %}
+    <div class="registration_form">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Register here</legend>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                <span class="form_error">{{ field.errors }}</span>
+                <span class="form_field_label">{{ field.label }}</span>
+                <div class="form_field_input">{{ field }}</div>
+                <div class="form_field_help_text">{{ field.help_text }}</div>
+                {% endfor %}
+            </fieldset>
+            <div class="centered"><button id="bluebutton" type="submit" >Register</button></div>
+        </form>
+        <div class="small_adnotation" >
+            <small>
+                Already have an account? <a href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}
